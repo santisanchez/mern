@@ -8,7 +8,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import CollectData from './components/pages/CollectData';
+import CollectData from './components/pages/CollectData/CollectData';
 
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
 
   return (
     <Router>
-<div>
+    <div>
         <nav>
           <ul>
             <li>
