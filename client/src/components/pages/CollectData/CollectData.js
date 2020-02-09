@@ -1,8 +1,6 @@
 import React,{useState} from 'react'
 import {useSpring, animated as a} from 'react-spring'
 
-import './CollectData.scss';
-
 import PlayerModule from '../../organisms/PlayerModule';
 
 import {Grid, Card,Paper} from '@material-ui/core'
