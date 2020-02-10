@@ -1,25 +1,19 @@
 import React from 'react'
-import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import './PlayerModule.scss';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
+const useStyles = makeStyles({
+  button: {
+    height: 170,
+    width: '100%',
   },
-  paper: {
-    height: 140,
-    width: 120,
-  },
-  control: {
-    padding: theme.spacing(2),
-  },
-}));
+});
 
 export default function PlayerModule({player}) {
     const classes = useStyles();
-    return (<Paper className={classes.paper}>
+    return (<Button className={classes.button}>
         <span>{player.name}</span>
-      </Paper>
+    </Button>
     );
 }

@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import {useSpring, animated as a} from 'react-spring'
 
 import PlayerModule from '../../organisms/PlayerModule';
@@ -20,15 +20,19 @@ const useStyles = makeStyles({
       maxWidth: 345,
     },
     media: {
-      height: 140,
+      height: 170,
     },
     paper: {
-        height: 140,
+        height: 170,
         width: 120,
     },
     flipContainer:{
         position: "relative",
         willChange: 'transform,opacity'
+    },
+    button:{
+        height: 120,
+        width: '100%'
     }
   });
 
@@ -62,7 +66,7 @@ export default function CollectData() {
     const [players,setPlayers] = useState([{},{},{},{},{},{},{},{},{},{},{}]);
     const [benchPlayers,setBenchPlayers] = useState([{},{},{},{},{},{},{},{}])
     // const [changeSelectedPlayer,setChangeSelectedPlayer] = useState('');
-    const [flipped, set] = useState(false)
+    const [flipped, setFlipped] = useState(false)
     const { transform } = useSpring({
         opacity: flipped ? 1 : 0,
         transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
@@ -72,16 +76,25 @@ export default function CollectData() {
     const selectPlayer = (player,index) => {setSelectedPlayer({...player,index})}
 
     const showBenchPlayers = ()=>{
-        set(state => !state)
-        setPlayers(players__API);
-        setBenchPlayers(benchPlayers__API);
+        setFlipped(!flipped)
     }
 
     const changePlayer = (newPlayer,index) =>{
-        setPlayers(players.splice(selectedPlayer.index,1,newPlayer));
-        setBenchPlayers(benchPlayers.splice(index,1,selectedPlayer));
+        players.splice(selectedPlayer.index,1,newPlayer)
+        // setPlayers();
+        // setBenchPlayers();
+        benchPlayers.splice(index,1,selectedPlayer)
+        setSelectedPlayer({});
         showBenchPlayers();
     }
+
+    useEffect(()=>{
+        console.log("useEffect");
+        setTimeout(()=>{
+            setPlayers(players__API);
+            setBenchPlayers(benchPlayers__API);
+        },1000);
+    },[])
 
     return (
         <Grid container direction={"row"} >
@@ -92,19 +105,21 @@ export default function CollectData() {
                         {players.map((player,index) => (
 
                             player.name ? (<Grid item xs={3}>
-                                <Button onClick={()=>{selectPlayer(player,index)}} >
+                                <Paper className={classes.paper} onClick={()=>{selectPlayer(player,index)}}>
                                     <PlayerModule key={player.id} player={player}/>
-                                </Button>
+                                </Paper>
                             </Grid>) : (<Grid item xs={3}>
-                                <Skeleton variant="rect" width={120} height={140}>
+                                <Skeleton variant="rect" width={120} height={170}>
                                     <Paper className={classes.paper}></Paper>
                                 </Skeleton>
                             </Grid>)
                         ))}
                         <Grid item xs={3}>
-                            <Button onClick={showBenchPlayers} >
-                                <Paper className={classes.paper}><span>Change player</span></Paper>
-                            </Button>
+                            <Paper className={classes.paper}>
+                                <Button onClick={showBenchPlayers} className={classes.paper} disabled={!selectedPlayer.name}>
+                                    Change player
+                                </Button>
+                            </Paper>
                         </Grid>
                     </Grid>
             </a.div>}
@@ -113,16 +128,18 @@ export default function CollectData() {
             <Grid container>
                     {benchPlayers.map((player,index) => (
                         <Grid item xs={3}>
-                            <Button onClick={()=>{changePlayer(player,index)}} >
+                            <Paper onClick={()=>{changePlayer(player,index)}} >
                                 <PlayerModule key={player.id} player={player}/>
-                            </Button>
+                            </Paper>
                         </Grid>
                     ))}
                     <Grid item xs={3}>
-                        <Button onClick={showBenchPlayers} >
-                            <Paper className={classes.paper}><span>Change player</span></Paper>
-                    </Button>
-                </Grid>
+                        <Paper className={classes.paper}>
+                            <Button onClick={showBenchPlayers} className={classes.paper}>
+                                Change player
+                            </Button>
+                        </Paper>
+                    </Grid>
             </Grid>
         </a.div>}
             </Grid>
@@ -154,21 +171,31 @@ export default function CollectData() {
                 </Card>
             </Grid>
             <Grid item xs={2}>
-                <Button>
-                    <Paper className={classes.paper}></Paper>
-                </Button>
-                <Button>
-                    <Paper className={classes.paper}></Paper>
-                </Button>
-                <Button>
-                    <Paper className={classes.paper}></Paper>
-                </Button>
-                <Button>
-                    <Paper className={classes.paper}></Paper>
-                </Button>
-                <Button>
-                    <Paper className={classes.paper}></Paper>
-                </Button>
+                <Paper >
+                    <Button className={classes.button}>
+                        Action
+                    </Button>
+                </Paper>
+                <Paper >
+                    <Button className={classes.button}>
+                        Action
+                    </Button>
+                </Paper>
+                    <Paper >
+                    <Button className={classes.button}> 
+                        Action
+                    </Button>
+                </Paper>
+                <Paper >
+                    <Button className={classes.button}>
+                        Action
+                    </Button>
+                </Paper>
+                <Paper >
+                    <Button className={classes.button}>
+                        Action
+                    </Button>
+                </Paper>
             </Grid>
         </Grid>
     )
