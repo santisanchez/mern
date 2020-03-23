@@ -14,7 +14,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Skeleton from '@material-ui/lab/Skeleton';
 
-
 const useStyles = makeStyles({
     root: {
       maxWidth: 345,
@@ -89,7 +88,6 @@ export default function CollectData() {
     }
 
     useEffect(()=>{
-        console.log("useEffect");
         setTimeout(()=>{
             setPlayers(players__API);
             setBenchPlayers(benchPlayers__API);
