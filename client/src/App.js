@@ -1,7 +1,5 @@
-import React, {useState,useEffect} from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-import {Routify} from './routes/MainRoutes';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,34 +9,38 @@ import {
 import CollectData from './components/pages/CollectData';
 
 
+import { Provider } from 'react-redux'
+import store from './store'
+
+import ControlPanel from './components/pages/ControlPanel/ControlPanel';
+
 function App() {
 
-  const [team,setTeam] = useState([])
-
-  useEffect(()=>{
-    // console.log(Routify('getTeamById',1,2))
-  },[])
-
   return (
+  <Provider store={store}>
     <Router>
-<div>
+      <div>
         <nav>
           <ul>
             <li>
               <Link to="/collect">Collect Data</Link>
             </li>
+            <li>
+              <Link to="/controlpanel">Control Panel</Link>
+            </li>
           </ul>
         </nav>
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/collect">
             <CollectData />
           </Route>
+          <Route path="/controlpanel">
+            <ControlPanel />
+          </Route>
         </Switch>
       </div>
     </Router>
+  </Provider>
   );
 }
 
