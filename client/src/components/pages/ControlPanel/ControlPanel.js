@@ -2,13 +2,9 @@ import React,{useState,useEffect,useCallback} from 'react'
 
 
 import { Grid } from '@material-ui/core'
-
-import { DndProvider } from 'react-dnd';
-import TouchBackend from 'react-dnd-touch-backend'
-import Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper'
 import { connect } from "react-redux";
-import {setPlayerPosition} from "../../../actions/actions";
+import {setPlayersPositions} from "../../../actions/actions";
 
 
 import AvailablePlayers from '../../organisms/AvailablePlayers/AvailablePlayers';
@@ -64,12 +60,10 @@ const benchPlayersInit = [
     {id:8,image:'',name:'',type:'all'}
 ];
 
-function ControlPanel({playerDropBox,setPlayerPosition}) {
+function ControlPanel({setPlayersPositions,playersPositions}) {
     const [players,setPlayers] = useState(playersInit);
     const [benchPlayers,setBenchPlayers] = useState(benchPlayersInit);
-    const isMobile = window.outerWidth <= 1204;
-    const backend = isMobile ? TouchBackend : Backend;
-    
+
     useEffect(()=>{
         setTimeout(()=>{
             setPlayers(players__API);
@@ -79,8 +73,8 @@ function ControlPanel({playerDropBox,setPlayerPosition}) {
 
     const [droppedBoxNames, setDroppedBoxNames] = useState([])
 
-    function isDropped(boxName) {
-      return droppedBoxNames.indexOf(boxName) > -1
+    function isPlaying(playerName) {
+      return droppedBoxNames.indexOf(playerName) > -1
     }
 
     const handleDrop = useCallback(
@@ -90,24 +84,22 @@ function ControlPanel({playerDropBox,setPlayerPosition}) {
                 update(droppedBoxNames, name ? { $push: [name] } : { $push: [] }),
             )
             item.index = index;
-            setPlayerPosition(item);
+            setPlayersPositions(item);
         },
-    [ playerDropBox,droppedBoxNames])
+    [ setPlayersPositions,droppedBoxNames])
 
     return (
         <div>
             <Grid container justify="space-evenly">
-                <DndProvider backend={backend}>
-                    <FootballField playerDropBox={playerDropBox} handleDrop={handleDrop} isDropped={isDropped}/>
-                    <AvailablePlayers droppedBoxNames={droppedBoxNames} players={players} benchPlayers={benchPlayers}/>
-                </DndProvider>
+                <FootballField playersPositions={playersPositions} handleDrop={handleDrop} isPlaying={isPlaying}/>
+                <AvailablePlayers droppedBoxNames={droppedBoxNames} players={players} benchPlayers={benchPlayers}/>
             </Grid>
         </div>
     )
 }
 
 const mapStateToProps = (state) =>{
-    return {playerDropBox: state.players};
+    return {playersPositions: state.playersPositions.playersPositions};
 }
-ControlPanel = connect(mapStateToProps,{setPlayerPosition})(ControlPanel)
+ControlPanel = connect(mapStateToProps,{setPlayersPositions})(ControlPanel)
 export default ControlPanel;

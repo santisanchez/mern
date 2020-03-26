@@ -1,8 +1,7 @@
 import { SET_PLAYER } from '../actions/actionsTypes';
 import update from 'immutability-helper'
 
-const initialState = {
-    players: [
+const initialState = {playersPositions:  [
         {id:1,item:'', lastDroppedItem: null ,classStyles: 'archer pin-1',accept:['all']},
         {id:2,item:'', lastDroppedItem: null ,classStyles: 'defences pin-1',accept:['all']},
         {id:3,item:'', lastDroppedItem: null ,classStyles: 'defences pin-2',accept:['all']},
@@ -13,19 +12,20 @@ const initialState = {
         {id:8,item:'', lastDroppedItem: null ,classStyles: 'middle pin-3',accept:['all']},
         {id:9,item:'', lastDroppedItem: null ,classStyles: 'middle pin-4',accept:['all']},
         {id:10,item:'', lastDroppedItem: null ,classStyles: 'attack pin-1',accept:['all']},
-        {id:11,item:'', lastDroppedItem: null ,classStyles: 'attack pin-2',accept:['all']},
+        {id:11,item:'', lastDroppedItem: null ,classStyles: 'attack pin-2',accept:['all']}
     ]
 }
-
-export default function(state = initialState,action,index){
+export default function(state = initialState,action){
     switch (action.type) {
         case SET_PLAYER: {
             const { content } = action.payload;
             return {
                 ...state,
-                players: update(state.players,{[content.index]: {
-                        lastDroppedItem:{ $set: content}
-                }})
+                playersPositions:update(state.playersPositions,{
+                    [content.index]: {
+                        lastDroppedItem:{$set: content}
+                    }
+                })
             }
         }
         default: {

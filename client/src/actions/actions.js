@@ -1,7 +1,7 @@
-import {SET_PLAYER,CHANGE_PLAYER} from './actionsTypes'
+import {SET_PLAYER,CHANGE_PLAYER,ADD_PLAYER_NAME} from './actionsTypes'
 
 
-export const setPlayerPosition = content => ({
+export const setPlayersPositions = content => ({
     type: SET_PLAYER,
     payload:{
         content
@@ -13,4 +13,9 @@ export const changePlayer = player => ({
     payload:{
         player
     }
+})
+
+export const playersInField = playerName => ({
+    type: ADD_PLAYER_NAME,
+    payload: playerName
 })

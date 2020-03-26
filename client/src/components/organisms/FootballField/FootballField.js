@@ -4,7 +4,7 @@ import './FootballField.scss'
 
 import React from 'react'
 
-export default function FootballField({playerDropBox,handleDrop,isDropped}) {
+export default function FootballField({playersPositions,handleDrop,isPlaying}) {
 
   return (
       <div className="container">
@@ -18,8 +18,8 @@ export default function FootballField({playerDropBox,handleDrop,isDropped}) {
         <div className="p-place top"></div>
         <div className="p-place bottom"></div>
           <div className="pins">
-            {playerDropBox.map(({id,classStyles,lastDroppedItem,accept},index)=>(
-              (<PlayerDropBox key={id} classes={"pin "+classStyles} accept={accept} handleDrop={(item) => {handleDrop(index, item)}} lastDroppedItem={lastDroppedItem} />)
+            {playersPositions.map(({id,classStyles,lastDroppedItem,accept},index)=>(
+              (<PlayerDropBox key={id} classes={"pin "+classStyles} accept={accept} handleDrop={(item) => {handleDrop(index, item)}} disabled={isPlaying} lastDroppedItem={lastDroppedItem}/>)
             ))}
           </div>
       </div>

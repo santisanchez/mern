@@ -9,15 +9,20 @@ import {
 import CollectData from './components/pages/CollectData/CollectData';
 
 
+import { DndProvider } from 'react-dnd';
+import TouchBackend from 'react-dnd-touch-backend'
+import Backend from 'react-dnd-html5-backend';
 import { Provider } from 'react-redux'
 import store from './store'
 
 import ControlPanel from './components/pages/ControlPanel/ControlPanel';
 
 function App() {
-
+  const isMobile = window.outerWidth <= 1204;
+  const backend = isMobile ? TouchBackend : Backend;
   return (
   <Provider store={store}>
+  <DndProvider backend={backend}>
     <Router>
       <div>
         <nav>
@@ -40,6 +45,7 @@ function App() {
         </Switch>
       </div>
     </Router>
+  </DndProvider>
   </Provider>
   );
 }
