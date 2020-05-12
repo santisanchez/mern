@@ -17,6 +17,7 @@ import store from './store'
 
 import ControlPanel from './components/pages/ControlPanel/ControlPanel';
 import Login from './components/pages/Login/Login';
+import Register from './components/pages/Register/Register';
 
 function App() {
   const isMobile = window.outerWidth <= 1204;
@@ -37,6 +38,9 @@ function App() {
             <li>
               <Link to="/login">Login</Link>
             </li>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
           </ul>
         </nav>
         <Switch>
@@ -48,6 +52,9 @@ function App() {
           </Route>
           <Route>
             <Login />
+          </Route>
+          <Route path="/register">
+            <Register/>
           </Route>
         </Switch>
       </div>
