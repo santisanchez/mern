@@ -50,7 +50,7 @@ function App() {
           <Route path="/controlpanel">
             <ControlPanel />
           </Route>
-          <Route>
+          <Route path="/login">
             <Login />
           </Route>
           <Route path="/register">
