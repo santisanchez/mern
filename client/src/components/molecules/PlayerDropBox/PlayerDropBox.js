@@ -20,7 +20,7 @@ export default function PlayerDropBox({ accept, lastDroppedItem, handleDrop, cla
     return (
         // <p>{accept}</p>
         <div ref={drop} className={classes} styles={backgroundColor}>
-            {lastDroppedItem && <p>{JSON.stringify(lastDroppedItem)}</p>}
+            {lastDroppedItem && <p>{lastDroppedItem.name}</p>}
         </div>
     )
 }
