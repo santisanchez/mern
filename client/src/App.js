@@ -16,6 +16,7 @@ import { Provider } from 'react-redux'
 import store from './store'
 
 import ControlPanel from './components/pages/ControlPanel/ControlPanel';
+import Login from './components/pages/Login/Login';
 
 function App() {
   const isMobile = window.outerWidth <= 1204;
@@ -33,6 +34,9 @@ function App() {
             <li>
               <Link to="/controlpanel">Control Panel</Link>
             </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
           </ul>
         </nav>
         <Switch>
@@ -41,6 +45,9 @@ function App() {
           </Route>
           <Route path="/controlpanel">
             <ControlPanel />
+          </Route>
+          <Route>
+            <Login />
           </Route>
         </Switch>
       </div>
