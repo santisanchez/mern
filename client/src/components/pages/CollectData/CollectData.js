@@ -44,27 +44,27 @@ function CollectData({setPlayersPositions,playersPositions,playersInField}) {
             <Grid item xs={2}>
                 <Paper >
                     <Button>
-                        Action
+                        Pase Bueno
                     </Button>
                 </Paper>
                 <Paper >
                     <Button>
-                        Action
+                        Pase Malo
                     </Button>
                 </Paper>
                     <Paper >
                     <Button>
-                        Action
+                        Gol
                     </Button>
                 </Paper>
                 <Paper >
                     <Button>
-                        Action
+                        Faltas
                     </Button>
                 </Paper>
                 <Paper >
                     <Button>
-                        Action
+                        Atrapadas
                     </Button>
                 </Paper>
             </Grid>
